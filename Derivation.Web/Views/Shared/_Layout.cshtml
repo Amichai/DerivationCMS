@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-cookies.min.js"></script>
+    <script src="~/Scripts/smart-table.min.js"></script>
+</head>
+<body ng-app="annotation" ng-cloak>
+    <div class="navbar navbar-inverse navbar-fixed-top navigationBar" id="rootNavigationBar">
+        <div class="container">
+            <div ng-controller="navBarCtrl">
+                <nav class="navbar navbar-default" style="background-color:transparent;border:none">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a class="navbar-brand" href="/" ng-class="{'selectedNavigationElement':currentPage == 'Home'}">Home</a></li>
+                                <li>
+                                    <a href="/Users" ng-hide="currentUserModel == undefined || currentUserModel.Role == 'user'"
+                                       ng-class="{'selectedNavigationElement':currentPage == 'Users'}">Users</a>
+                                </li>
+                                <li>
+                                    <a href="/Help"
+                                       ng-class="{'selectedNavigationElement':currentPage == 'Help'}">API</a>
+                                </li>
+                            </ul>
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input ng-enter="submitSearch()"
+                                            type="text" class="form-control" placeholder="Search" ng-model="searchQuery"/>
+                                </div>
+                                <button ng-click="submitSearch()"
+                                        type="submit" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown" ng-hide="currentUserModel == undefined">
+                                    <a href=" #" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{currentUserModel.UserId}}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="min-width:120px">
+                                        <li><a href="/User?UserId={{currentUserModel.UserId}}">Profile</a></li>
+                                        <li><a href="/">Messages</a></li>
+                                        <li><a href="/Account">Log out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Controllers/NavBarController.js"></script>
+    @RenderSection("scripts", required: false)
+    <script>
+    @{
+            string str = HttpContext.Current.Request.Path;
+        }
+        var baseUrl = 'https://' + '@HttpContext.Current.Request.Url.Authority' + '/';
+        //var baseUrl = 'http://' + '@HttpContext.Current.Request.Url.Authority' + '/';
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿
+<div ng-controller="mainCtrl">
+    <h3>My Documents</h3>
+    <table st-table="documents"
+           st-safe-src="documentsSafe" class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th st-sort="Title">Title</th>
+                <th st-sort="Author">Author</th>
+                <th st-sort="Owner">Owner</th>
+                <th st-sort="AnnotationCount">Annotations</th>
+                <th>Can Edit</th>
+                <th title="anyone can view">Public</th>
+                <th title="anyone can edit">Open</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in documents track by $index">
+                <td>
+                    <span class="glyphicon glyphicon-trash" style="cursor:pointer" ng-click="trash(row)"></span>
+                    <span class="glyphicon glyphicon-edit" style="cursor:pointer" ng-click="edit(row)"></span>
+                </td>
+                <td><a href="/Document?id={{row.Id}}">{{row.Title}}</a></td>
+                <td>{{row.Author}}</td>
+                <td>
+                    <span ng-show="row.IsOwnedByMe"><i>me</i></span>
+                    <a ng-hide="row.IsOwnedByMe" style="cursor:pointer" href="/User?userId={{row.Owner}}">{{row.Owner}}</a>
+                </td>
+                <td>{{row.AnnotationCount}}</td>
+                <td>
+                    <span>{{row.PermissionedString}}</span>
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#editPermissionsModal" ng-click="editDocumentPermissions(row)">
+                        +/-
+                    </button>
+                </td>
+                <td>
+                    <span style="cursor:pointer" ng-hide="row.IsPublic" class="glyphicon glyphicon-unchecked" ng-click="makePublic(row, true)"></span>
+                    <span style="cursor:pointer" ng-show="row.IsPublic" class="glyphicon glyphicon-check" ng-click="makePublic(row, false)"></span>
+                </td>
+                <td>
+                    <span style="cursor:pointer" ng-hide="row.IsOpen" class="glyphicon glyphicon-unchecked" ng-click="makeOpen(row, true)"></span>
+                    <span style="cursor:pointer" ng-show="row.IsOpen" class="glyphicon glyphicon-check" ng-click="makeOpen(row, false)"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-default" type="submit" style="float:left;margin-left:10px;margin-top:13px" data-toggle="modal" data-target="#newDocumentModal" title="Add new annotation">
+        <span class="glyphicon glyphicon-plus">
+        </span>
+    </button>
+
+    <br />
+
+    <!-- Modal -->
+    <div class="modal fade" id="newDocumentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add New Document</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" placeholder="Title" class="form-control" ng-model="newDocumentTitle" />
+                    <input type="text" placeholder="Author" class="form-control" ng-model="newDocumentAuthor" />
+                    <textarea id="newDocumentTextArea" class="form-control" ng-model="newDocumentBody"></textarea>
+                    <div>
+                        <span>Public (anyone with a link can view) </span><input type="checkbox" ng-model="newDocumentIsPublic" value="true" />
+                    </div>
+                    <div ng-show="newDocumentIsPublic">
+                        <span>Open (anyone with a link can annotate) </span><input type="checkbox" ng-model="newDocumentIsOpen" value="true" />
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addNewDocument()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editDocumentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel3">Edit Document</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" placeholder="Author" class="form-control" ng-model="newDocumentAuthor" />
+                    <input type="text" placeholder="Title" class="form-control" ng-model="newDocumentTitle" />
+                    <textarea id="newDocumentTextArea" class="form-control" ng-model="newDocumentBody"></textarea>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="confirmEdit()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteDocumentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2">Confirm Delete</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete <i>{{docToDelete.Title}}</i>?
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" ng-click="confirmDelete()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editPermissionsModal" tabindex="-1" role="dialog" aria-labelledby="editPermissionsModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="editPermissionsModalLabel"><i>{{editPermissionsDoc.Title}}</i> - Edit Permissions</h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-repeat="perm in editPermissionsDoc.Permissioned">
+                        <button type="button" class="btn btn-danger btn-xs">
+                            <span class="glyphicon glyphicon-remove" ng-click="removePermissionedUser(perm)"></span>
+                        </button>
+                        <a href="/User?userId={{perm}}">{{perm}}</a>
+                    </div>
+                    <input ng-model="newPermissionedUser"/>
+                    <button type="button" class="btn btn-default btn-sm" 
+                            ng-click="addNewPermissionedUser()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/Util/DateFormat.js"></script>
+    <script src="~/Scripts/Controllers/HomeController.js"></script>
+}

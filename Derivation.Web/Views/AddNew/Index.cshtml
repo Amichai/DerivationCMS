@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Add New";
+}
+
+<h2>Add New</h2>
+
+<div ng-controller="addNewCtrl">
+    <div>
+        <button class="btn btn-default" ng-click="submit()">
+            Submit
+        </button>
+    </div>
+    <div>
+        <span>Title:</span>
+        <input ng-model="title" style="max-width:none;width:100%;resize:none" />
+    </div>
+    <div>
+        <span>Author:</span>
+        <input ng-model="author" style="max-width:none;width:100%;resize:none" />
+    </div>
+    <div>
+        <span>Body:</span>
+        <textarea ng-model="body" style="max-width:none;width:100%;height:500px"></textarea>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/Controllers/AddNewController.js"></script>
+}

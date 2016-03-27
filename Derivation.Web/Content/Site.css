@@ -1,0 +1,210 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top:20px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.inputValidationError {
+    border: red solid 1px;
+}
+
+.selectedNavigationElement {
+    color:white !important;
+}
+
+.headerFont {
+    font-family: "Segoe UI Light", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.st-sort-ascent:before {
+    content: '\25B2';
+}
+
+.st-sort-descent:before {
+    content: '\25BC';
+}
+
+.clickable {
+    cursor:pointer;
+}
+
+.linkedText {
+    font-weight:bold;
+}
+
+.highlightedText {
+    background-color:lightgray !important;
+}
+
+
+.hasAnnotation {
+    background-color:#EEEEEE;
+}
+
+hr {
+    margin-bottom:0;
+    margin-top:0;
+}
+
+.navLink {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    line-height: 39px;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+    float: left;
+}
+
+.navLink:hover {
+    text-decoration: none;
+    color: white;
+}
+
+#documentTitle {
+    font-size: 40px;
+    font-variant: small-caps;
+    font-family: serif;
+    font-weight: bold;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#documentAuthor {
+    font-size: 25px;
+    font-variant: small-caps;
+    font-family: serif;
+    font-weight: bold;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#textBody {
+    font-family:serif;
+    font-size:20px;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.setColumnStyle {
+    padding-top:8px;
+    margin:5px;
+    cursor:pointer;
+}
+
+#newDocumentTextArea, #newAnnotationTextArea, #editAnnotationTextArea {
+    width:100%;
+    max-width:100%;
+    height:150px;
+}
+
+.navigationBar {
+    /*background-color:#3097d1;*/
+    background-color:brown;
+    left:0;
+    text-decoration:none;
+    border:none;
+    width:100%;
+    height:28px;
+    position:absolute;
+    top:0;
+    box-shadow: 0 0 16px #888888;
+    text-align:center;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+.nav > li > a {
+    font-size:17px;
+}
+
+.navbar {
+    margin-bottom:0;
+}
+
+.rtl {
+    direction: rtl;
+}
+.ltr {
+    direction: ltr;
+}
+
+.leftColPulledLeft {
+    width:30%;
+}
+
+.leftColPulledRight {
+    width:50%;
+}
+
+.rightColPulledLeft {
+    width:70%;
+    left:30%;
+}
+
+.rightColPulledRight {
+    width:50%;
+    left:50%;
+}
+
+.documentReaderColumn {
+    overflow-y:scroll;
+    position:absolute;
+    top:55px;
+}
+
+#resizeTabRight {
+    background-color:lightgray;
+    padding:10px 5px 10px 5px;
+    position:absolute;
+    top:100px;
+    border-radius:0 10px 10px 0;
+    z-index:100;
+    left:30%;
+}
+
+#resizeTabLeft {
+    background-color:lightgray;
+    padding:10px 5px 10px 5px;
+    position:absolute;
+    top:100px;
+    border-radius:10px 0 0 10px;
+    z-index:100;
+    left:50%;
+    margin-left:-45px;
+}

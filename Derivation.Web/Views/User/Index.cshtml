@@ -1,0 +1,38 @@
+﻿@model string
+@{
+    ViewBag.Title = "User";
+}
+
+<div ng-controller="userCtrl">
+    <h2>@Model</h2>
+    <div class="row">
+        <div class="col-md-1 col-sm-1">Created:</div>
+        <div class="col-md-1 col-sm-1">{{createdString}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <h3>Documents</h3>
+            <div ng-repeat="doc in documents">
+                <a href="/Document?id={{doc.Id}}">{{doc.Title}}</a>
+                <hr />
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <h3>Annotations</h3>
+            <div ng-repeat="ann in annotations">
+                <span title="{{ann.Body}}">{{ann.PreviewText}}</span>
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/Util/DateFormat.js"></script>
+    <script src="~/Scripts/Controllers/UserController.js"></script>
+    <script>
+        var userId = '@Model';
+    </script>
+
+}

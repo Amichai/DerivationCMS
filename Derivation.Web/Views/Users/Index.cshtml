@@ -1,0 +1,73 @@
+﻿
+<h2 class="headerFont">User Accounts</h2>
+
+<div>
+    <div ng-controller="usersCtrl">
+        <table st-table="users"
+               st-safe-src="usersSafe" class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th st-sort="UserId">Username</th>
+                    <th st-sort="FirstName">First Name</th>
+                    <th st-sort="LastName">Last Name</th>
+                    <th st-sort="Created">Created</th>
+                    <th>User</th>
+                    <th>Manager</th>
+                    <th>Administrator</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in users track by $index">
+                    <th>
+                        <span style="cursor:pointer" ng-click="save(row)" ng-show="editing == row" class="glyphicon glyphicon-floppy-disk"></span>
+                        <span style="cursor:pointer" ng-click="edit(row)" ng-hide="editing == row" class="glyphicon glyphicon-edit"></span>
+                    </th>
+                    <td>
+                        <span><a href="/User?userId={{row.UserId}}">{{row.UserId}}</a></span>
+                    </td>
+                    <td>
+                        <span ng-hide="editing == row">{{row.FirstName}}</span>
+                        <input ng-show="editing == row" type="text" ng-model="row.FirstName" />
+                    </td>
+                    <td>
+                        <span ng-hide="editing == row">{{row.LastName}}</span>
+                        <input ng-show="editing == row" type="text" ng-model="row.LastName" />
+                    </td>
+                    <td>
+                        <span>{{row.CreatedString}}</span>
+                    </td>
+                    <td>
+                        <input type="radio" name="roleGroup{{row.UserId}}"
+                               ng-show="'user' == row.Role || editing == row"
+                               ng-model="row.Role" value="user" />
+                        <input disabled type="radio" name="roleGroup_disabled{{row.UserId}}"
+                               ng-hide="'user' == row.Role || editing == row"
+                               ng-model="row.Role" value="user" />
+                    </td>
+                    <td>
+                        <input type="radio" name="roleGroup{{row.UserId}}"
+                               ng-show="'manager' == row.Role || editing == row"
+                               ng-model="row.Role" value="manager" />
+                        <input disabled type="radio" name="roleGroup_disabled{{row.UserId}}"
+                               ng-hide="'manager' == row.Role || editing == row"
+                               ng-model="row.Role" value="manager" />
+                    </td>
+                    <td>
+                        <input type="radio"
+                               ng-show="'admin' == row.Role || editing == row"
+                               name="roleGroup{{row.UserId}}" ng-model="row.Role" value="admin" />
+                        <input disabled type="radio" name="roleGroup_disabled{{row.UserId}}"
+                               ng-hide="'admin' == row.Role || editing == row"
+                               ng-model="row.Role" value="admin" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/Util/DateFormat.js"></script>
+    <script src="~/Scripts/Controllers/UsersController.js"></script>
+}

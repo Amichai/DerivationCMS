@@ -1,0 +1,144 @@
+﻿@model Derivation.Web.Controllers.DocIdUserId
+@{
+
+    ViewBag.Title = "Index";
+}
+
+<div ng-controller="documentCtrl">
+    <div class="navbar navbar-inverse navbar-fixed-top navigationBar">
+        <div class="container">
+            <div ng-controller="navBarCtrl">
+                <nav class="navbar navbar-default" style="background-color:transparent;border:none">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a class="navbar-brand" href="/" ng-class="{'selectedNavigationElement':currentPage == 'Home'}">Home</a></li>
+                                <li>
+                                    <button class="btn btn-default" type="submit" style="margin-left:10px;margin-top:8px" data-toggle="modal" data-target="#newAnnotationModal" title="Add new annotation"><span class="glyphicon glyphicon-plus"></span></button>
+                                </li>
+                            </ul>
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search" />
+                                </div>
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUserModel.UserId}}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="min-width:120px">
+                                        <li><a href="/User?userId={{getUserId()}}">Profile</a></li>
+                                        <li><a href="/">Messages</a></li>
+                                        <li><a href="/Account">Log out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 documentReaderColumn" style="left:0;height:{{pageHeight}}px;"
+             ng-class="{'leftColPulledLeft':pullLeft, 'leftColPulledRight': !pullLeft}"
+             id="annotationPane">
+            <div ng-repeat="ann in annotations"
+                 ng-mouseenter="hover(ann, $index, true)"
+                 ng-mouseleave="hover(ann, $index, false)"
+                 ng-click="expandAnnotation(ann, $index)"
+                 id="annotation_{{$index}}">
+                <div ng-hide="ann.isExpanded">
+                    <span ng-repeat="unit in ann.AnnotationPreviewUnits.Tokens"
+                          ng-class="{linkedText: unit.Type == 'LinkedText'}">
+                        {{unit.Val}}
+                    </span><span ng-show="ann.IsPreviewCutoff">...</span>
+                </div>
+                <div ng-show="ann.isExpanded" style="font-size:17px">
+                    <span ng-repeat="unit in ann.AnnotationBodyUnits.Tokens"
+                          style="white-space:pre-wrap"
+                          ng-class="{linkedText: unit.Type == 'LinkedText'}">{{unit.Val}}</span>
+                    <div style="cursor:pointer;margin-left:30px">
+                        <a href="/User?userId={{ann.Author}}">{{ann.Author}}</a>
+                        <span class="glyphicon glyphicon-star-empty" ng-hide="ann.IsStarred" ng-click="starAnnotation(ann, true)"></span>
+                        <span class="glyphicon glyphicon-star" ng-show="ann.IsStarred" ng-click="starAnnotation(ann, false)" style="color:orange"></span>
+                        <a href="{{currentUrl}}"><span class="glyphicon glyphicon-link" style="color:black"></span></a>
+                        <span class="glyphicon glyphicon-trash" ng-show="canDelete(ann)" ng-click="deleteAnnotation(ann)"></span>
+                        <span class="glyphicon glyphicon-edit" ng-show="canEdit(ann)" ng-click="editAnnotation(ann)"></span>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </div>
+        <div>
+            <span class="glyphicon glyphicon-chevron-right clickable" id="resizeTabRight" ng-show="pullLeft" ng-click="pullLeft = false"></span>
+            <span class="glyphicon glyphicon-chevron-left clickable" id="resizeTabLeft" ng-hide="pullLeft" ng-click="pullLeft = true"></span>
+        </div>
+        <div class="col-md-9 documentReaderColumn" 
+             ng-class="{'rightColPulledLeft':pullLeft, 'rightColPulledRight': !pullLeft}"
+             style="height:{{pageHeight}}px;">
+            <span>Annotated by: <span ng-repeat="ann in annotators"><i><a href="/User?userId={{ann}}">{{ann}}</a></i></span></span>
+            <div id="documentTitle" ng-class="{rtl: isDocumentRtl}">{{document.Title}}</div>
+            <div id="documentAuthor" ng-class="{rtl: isDocumentRtl}">{{document.Author}}</div>
+            <br />
+            <div id="textBody" ng-class="{rtl: isDocumentRtl}">
+                <span ng-repeat="token in document.Tokens" id="token_{{$index}}"
+                      style="display:inline;"
+                      ng-click="clickToken(token)"
+                      ng-mouseenter="hoverToken(token, $index, true)"
+                      ng-mouseleave="hoverToken(token, $index, false)">{{token.AsString}}<br ng-show="token.IsLineBreak" /></span>
+            </div>
+            <div ng-hide="contentLoaded">
+                <img src="~/Content/Assets/default.gif" width="50"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newAnnotationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add New Annotation</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="newAnnotationTextArea" ng-model="newAnnotationText"></textarea>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveAnnotation()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editAnnotationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2">Edit Annotation</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="editAnnotationTextArea" ng-model="annotationBeingEdited.Body"></textarea>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveAnnotationEdits()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var documentId = '@Model.DocumentId';
+        var userId = '@Model.UserId';
+        var role = '@Model.Role';
+        var canView = '@Model.CanView';
+        var canAnnotate = '@Model.CanAnnotate';
+    </script>
+    <script src="~/Scripts/Controllers/DocumentController.js"></script>
+}

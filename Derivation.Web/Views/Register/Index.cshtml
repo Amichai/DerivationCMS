@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <div ng-controller="registerCtrl">
+        <div class="alert alert-danger alert-dismissable" role="alert"
+             ng-show="errorMessage.length > 0">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>{{errorMessage}}
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Log In</h3>
+                <div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" type="text" id="loginUsername">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" type="password" id="loginPassword">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-default" ng-click="authenticate()">Log In</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div>
+                    <h3>First time? Register!</h3>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" type="text" id="registrationUsername">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" type="password" id="registrationPassword">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-default" ng-click="register()">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/Controllers/RegisterController.js"></script>
+}
