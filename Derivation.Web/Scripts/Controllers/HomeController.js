@@ -4,7 +4,7 @@
             $scope.newDocumentBody = '';
             $scope.newDocumentTitle = '';
             $scope.newDocumentAuthor = '';
-            $http.get(baseUrl + 'api/Document').success(function (docs) {
+            $http.get(baseUrl + 'api/Derivation').success(function (docs) {
                 $scope.documents = docs;
                 $scope.documentsSafe = [].concat($scope.documents);
             });
@@ -132,4 +132,8 @@
             $scope.docToDelete = doc;
             $('#deleteDocumentModal').modal('show');
         }
-}]);
+
+        $scope.addNewDerivation = function() {
+            window.location.href = baseUrl + 'AddNew';
+        };
+    }]);

@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
  *
@@ -1006,7 +1006,7 @@ isXML = Sizzle.isXML = function( elem ) {
 
 /**
  * Sets document-related variables once based on the current document
- * @param {Element|Object} [doc] An element or document object to use to set the document
+ * @param {Element|Object} [derivation] An element or document object to use to set the document
  * @returns {Object} Returns the current document
  */
 setDocument = Sizzle.setDocument = function( node ) {
@@ -2684,7 +2684,7 @@ jQuery.fn.extend({
 			this,
 
 			// If this is a positional/relative selector, check membership in the returned set
-			// so $("p:first").is("p:last") won't return true for a doc with two "p".
+			// so $("p:first").is("p:last") won't return true for a derivation with two "p".
 			typeof selector === "string" && rneedsContext.test( selector ) ?
 				jQuery( selector ) :
 				selector || [],
@@ -5454,7 +5454,7 @@ var iframe,
 /**
  * Retrieve the actual display of a element
  * @param {String} name nodeName of the element
- * @param {Object} doc Document object
+ * @param {Object} derivation Document object
  */
 // Called only from within defaultDisplay
 function actualDisplay( name, doc ) {
@@ -9371,7 +9371,7 @@ function minErr(module, ErrorConstructor) {
  * lists a high level breakdown of each of the services/factories, filters, directives and testing
  * components available within this core module.
  *
- * <div doc-module-components="ng"></div>
+ * <div derivation-module-components="ng"></div>
  */
 
 var REGEX_STRING_REGEXP = /^\/(.+)\/([a-z]*)$/;
@@ -26226,7 +26226,7 @@ function $SceDelegateProvider() {
  *      one level of escaping depending on your templating engine and the way you interpolated
  *      the value.)  Do make use of your platform's escaping mechanism as it might be good
  *      enough before coding your own.  E.g. Ruby has
- *      [Regexp.escape(str)](http://www.ruby-doc.org/core-2.0.0/Regexp.html#method-c-escape)
+ *      [Regexp.escape(str)](http://www.ruby-derivation.org/core-2.0.0/Regexp.html#method-c-escape)
  *      and Python has [re.escape](http://docs.python.org/library/re.html#re.escape).
  *      Javascript lacks a similar built in function for escaping.  Take a look at Google
  *      Closure library's [goog.string.regExpEscape(s)](
@@ -26281,7 +26281,7 @@ function $SceDelegateProvider() {
  * </file>
  *
  * <file name="protractor.js" type="protractor">
- *   describe('SCE doc demo', function() {
+ *   describe('SCE derivation demo', function() {
  *     it('should sanitize untrusted values', function() {
  *       expect(element.all(by.css('.htmlComment')).first().getInnerHtml())
  *           .toBe('<span>Is <i>anyone</i> reading this?</span>');
@@ -32675,7 +32675,7 @@ var ngControllerDirective = [function() {
 
 // ngCsp is not implemented as a proper directive any more, because we need it be processed while we
 // bootstrap the system (before $parse is instantiated), for this reason we just have
-// the csp() fn that looks for the `ng-csp` attribute anywhere in the current doc
+// the csp() fn that looks for the `ng-csp` attribute anywhere in the current derivation
 
 /**
  * @ngdoc directive

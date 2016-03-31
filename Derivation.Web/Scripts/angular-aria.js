@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
@@ -15,7 +15,7 @@
  * attributes that convey state or semantic information about the application for users
  * of assistive technologies, such as screen readers.
  *
- * <div doc-module-components="ngAria"></div>
+ * <div derivation-module-components="ngAria"></div>
  *
  * ## Usage
  *

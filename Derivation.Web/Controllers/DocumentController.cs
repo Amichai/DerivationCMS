@@ -1,6 +1,4 @@
-﻿using Derivation.Web.Data;
-using Derivation.Web.Models;
-using Derivation.Web.Util;
+﻿using Derivation.Web.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,30 +13,16 @@ namespace Derivation.Web.Controllers
         public ActionResult Index(Guid id)
         {
             var user = IdentityUtil.GetCurrentUser();
-            bool canView, canAnnotate;
-            if (user != null && user.IsAdministrator) {
-                return View(new DocIdUserId(true, true) {
-                    DocumentId = id,
-                    UserId = user.UserId,
-                    Role = user.Role
-                });
-            }
             if (user == null)
             {
-                canView = true;
-                canAnnotate = false;
+                return AccountController.Instance.Logout();
             }
-            else
-            {
-                DynamoDBConnection.Instance.UserDocumentPermissions(id, user.UserId, out canView, out canAnnotate);
-            }
-            var userId = user == null ? "" : user.UserId;
-            var role = user == null ? "" : user.Role;
 
-            return View(new DocIdUserId(canView, canAnnotate) {
+            return View(new DocIdUserId(true, true)
+            {
                 DocumentId = id,
-                UserId = userId,
-                Role = role
+                UserId = user.UserId,
+                Role = user.Role
             });
         }
     }

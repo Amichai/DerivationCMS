@@ -28,7 +28,7 @@ var $sanitizeMinErr = angular.$$minErr('$sanitize');
  * The `ngSanitize` module provides functionality to sanitize HTML.
  *
  *
- * <div doc-module-components="ngSanitize"></div>
+ * <div derivation-module-components="ngSanitize"></div>
  *
  * See {@link ngSanitize.$sanitize `$sanitize`} for usage.
  */

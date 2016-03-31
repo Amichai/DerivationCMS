@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Derivation.Web.Controllers.api;
 using Derivation.Web.Data;
+using Derivation.Web.Util;
 
 namespace Derivation.Web.Controllers {
     public class HomeController : Controller {
@@ -12,11 +13,9 @@ namespace Derivation.Web.Controllers {
             ViewBag.Title = "Home Page";
             var sessionId = Request.Cookies["session_id"];
             bool isSessionValid = AuthenticationController.IsSessionIdValid(Request);
-            if (!isSessionValid) {
-                return RedirectToAction("Index", "Register");
-            } 
-            if (userId == null) {
-                userId = Request.Cookies["user_id"].Value;
+            if (!isSessionValid)
+            {
+                userId = IdentityUtil.ANONYMOUS_USERID;
                 ViewBag.UserId = userId;
             }
             return View();

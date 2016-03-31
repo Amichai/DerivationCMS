@@ -8,6 +8,8 @@ namespace Derivation.Web.Controllers
 {
     public class AccountController : Controller
     {
+
+        public static AccountController Instance = new AccountController();
         // GET: Account
         public ActionResult Index()
         {

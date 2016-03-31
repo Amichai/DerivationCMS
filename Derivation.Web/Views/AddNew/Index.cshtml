@@ -1,30 +1,77 @@
-﻿
+﻿@model string
 @{
     ViewBag.Title = "Add New";
 }
 
-<h2>Add New</h2>
+<h2>Add New Derivation</h2>
 
 <div ng-controller="addNewCtrl">
+
+    <h3>Title:</h3>
+    <input type="text" class="form-control" ng-model="newTitle" style="max-width: 100%; width: 100%;"/>
+
     <div>
-        <button class="btn btn-default" ng-click="submit()">
-            Submit
-        </button>
+        <span>Description:</span>
+        <textarea class="form-control" ng-model="newDescription" style="max-width: 100%; width: 100%;"></textarea>
     </div>
-    <div>
-        <span>Title:</span>
-        <input ng-model="title" style="max-width:none;width:100%;resize:none" />
+
+    <div ng-repeat="step in steps track by $index">
+        <h4>Step {{$index + 1}}</h4>
+
+        <br/>
+
+        {{step.Transition}}
+        <br/>
+        ${{step.Equation}}$
+        <br/>
+        {{step.Notes}}
+        <br/>
+
     </div>
+    <br/>
+
+    <h3>Add Step:</h3>
+
     <div>
-        <span>Author:</span>
-        <input ng-model="author" style="max-width:none;width:100%;resize:none" />
-    </div>
-    <div>
-        <span>Body:</span>
-        <textarea ng-model="body" style="max-width:none;width:100%;height:500px"></textarea>
+        <div>
+            <span>Equation:</span>
+            <textarea class="form-control" ng-model="newEquation" style="max-width: 100%; width: 100%;"></textarea>
+        </div>
+        <div>
+            <span>Transition:</span>
+            <textarea class="form-control" ng-model="newTransition" style="max-width: 100%; width: 100%;"></textarea>
+        </div>
+        <div>
+            <span>Notes:</span>
+            <textarea class="form-control" ng-model="newNotes" style="max-width: 100%; width: 100%;"></textarea>
+        </div>
+        <br />
+
+        <div>
+            <button class="btn btn-default" ng-click="add()" style="float: right">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+
+        <br/>
+        <br/>
+
+        <div>
+            <button class="btn btn-default" ng-click="submit()">
+                Submit
+            </button>
+        </div>
     </div>
 </div>
 
 @section Scripts{
+    <script>
+        var userId = '@Model';
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
     <script src="~/Scripts/Controllers/AddNewController.js"></script>
 }

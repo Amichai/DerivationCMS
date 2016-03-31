@@ -10,12 +10,10 @@ using System.Web.Http;
 
 namespace Derivation.Web.Controllers.api {
     public class AnnotatedDocumentController : ApiController {
-        public AnnotatedDocument Get(Guid id) {
-            DocumentModel doc = DynamoDBConnection.Instance.GetDocument(id);
+        public DerivationModel Get(Guid id) {
+            DerivationModel doc = DynamoDBConnection.Instance.GetDerivation(id);
             var user = IdentityUtil.GetCurrentUser();
-            List<AnnotationModel> annotations = DynamoDBConnection.Instance.GetAnnotations(id, doc).Where(i => !i.IsArchived).ToList();
-            return new AnnotatedDocument(annotations.OrderBy(i => i.Ord).ToList(),
-                doc);
+            return new DerivationModel();
         }
     }
 }

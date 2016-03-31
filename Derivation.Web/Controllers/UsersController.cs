@@ -16,6 +16,11 @@ namespace Derivation.Web.Controllers {
                 return RedirectToAction("Index", "Register");
             } else {
                 var user = IdentityUtil.GetCurrentUser();
+                if (user == null)
+                {
+                    return AccountController.Instance.Logout();
+                }
+
                 if (!user.IsAdministrator && !user.IsManager) {
                     return RedirectToAction("Index", "Home");
                 }

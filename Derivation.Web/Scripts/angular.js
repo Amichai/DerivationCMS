@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.3.4
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
@@ -168,7 +168,7 @@ function minErr(module, ErrorConstructor) {
  * lists a high level breakdown of each of the services/factories, filters, directives and testing
  * components available within this core module.
  *
- * <div doc-module-components="ng"></div>
+ * <div derivation-module-components="ng"></div>
  */
 
 var REGEX_STRING_REGEXP = /^\/(.+)\/([a-z]*)$/;
@@ -15312,7 +15312,7 @@ function $SceDelegateProvider() {
  *      one level of escaping depending on your templating engine and the way you interpolated
  *      the value.)  Do make use of your platform's escaping mechanism as it might be good
  *      enough before coding your own.  e.g. Ruby has
- *      [Regexp.escape(str)](http://www.ruby-doc.org/core-2.0.0/Regexp.html#method-c-escape)
+ *      [Regexp.escape(str)](http://www.ruby-derivation.org/core-2.0.0/Regexp.html#method-c-escape)
  *      and Python has [re.escape](http://docs.python.org/library/re.html#re.escape).
  *      Javascript lacks a similar built in function for escaping.  Take a look at Google
  *      Closure library's [goog.string.regExpEscape(s)](
@@ -15367,7 +15367,7 @@ function $SceDelegateProvider() {
  * </file>
  *
  * <file name="protractor.js" type="protractor">
- *   describe('SCE doc demo', function() {
+ *   describe('SCE derivation demo', function() {
  *     it('should sanitize untrusted values', function() {
  *       expect(element.all(by.css('.htmlComment')).first().getInnerHtml())
  *           .toBe('<span>Is <i>anyone</i> reading this?</span>');
@@ -22758,7 +22758,7 @@ var ngControllerDirective = [function() {
 
 // ngCsp is not implemented as a proper directive any more, because we need it be processed while we
 // bootstrap the system (before $parse is instantiated), for this reason we just have
-// the csp.isActive() fn that looks for ng-csp attribute anywhere in the current doc
+// the csp.isActive() fn that looks for ng-csp attribute anywhere in the current derivation
 
 /**
  * @ngdoc directive

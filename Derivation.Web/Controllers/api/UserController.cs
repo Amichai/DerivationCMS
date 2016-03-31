@@ -20,14 +20,12 @@ namespace Derivation.Web.Controllers.api
             }
             var json = JObject.Parse(userDict["UserInfo"]);
             var user = UserModel.FromJson(json);
-            var docs = db.GetUserDocuments(userId);
-            var annotations = db.GetUserAnnotations(userId);
+            var docs = db.GetUserDerivations(userId);
             return new ProfileModel() {
                 Created = new DateTime(user.Created),
                 CreatedString = user.CreatedString,
                 UserId = userId,
-                RecentAnnotations = annotations.ToList(),
-                Documents = docs.ToList()
+                Derivations = docs.ToList()
             };
         }
     }

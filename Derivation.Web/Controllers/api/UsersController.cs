@@ -20,10 +20,10 @@ namespace Derivation.Web.Controllers.api {
             this.getCurrentUser = IdentityUtil.GetCurrentUser;
         }
 
-        private IDataManager dataManager;
+        private DynamoDBConnection dataManager;
         private Func<UserModel> getCurrentUser;
 
-        public UsersController(IDataManager dataManager) {
+        public UsersController(DynamoDBConnection dataManager) {
             this.dataManager = dataManager;
             this.getCurrentUser = () => new UserModel() {
                 UserId = "TestUser",

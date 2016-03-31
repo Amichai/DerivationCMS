@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
@@ -59,7 +59,7 @@ function shallowClearAndCopy(src, dst) {
  * via the $resource service.
  *
  *
- * <div doc-module-components="ngResource"></div>
+ * <div derivation-module-components="ngResource"></div>
  *
  * See {@link ngResource.$resource `$resource`} for usage.
  */

@@ -19,7 +19,7 @@
  *
  * See {@link ngTouch.$swipe `$swipe`} for usage.
  *
- * <div doc-module-components="ngTouch"></div>
+ * <div derivation-module-components="ngTouch"></div>
  *
  */
 

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
@@ -18,7 +18,7 @@
  * See {@link ngRoute.$route#example $route} for an example of configuring and using `ngRoute`.
  *
  *
- * <div doc-module-components="ngRoute"></div>
+ * <div derivation-module-components="ngRoute"></div>
  */
  /* global -ngRouteModule */
 var ngRouteModule = angular.module('ngRoute', ['ng']).

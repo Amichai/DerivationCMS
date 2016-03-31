@@ -157,9 +157,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddNewController.cs" />
     <Compile Include="Controllers\api\AnnotatedDocumentController.cs" />
-    <Compile Include="Controllers\api\AnnotationController.cs" />
     <Compile Include="Controllers\api\AuthenticationController.cs" />
-    <Compile Include="Controllers\api\DocumentController.cs" />
+    <Compile Include="Controllers\api\DerivationController.cs" />
     <Compile Include="Controllers\api\PermissionsController.cs" />
     <Compile Include="Controllers\api\SearchController.cs" />
     <Compile Include="Controllers\api\UserController.cs" />
@@ -170,16 +169,10 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\DynamoDBConnection.cs" />
-    <Compile Include="Data\FakeDataManager.cs" />
-    <Compile Include="Data\IDataManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AnnotatedDocument.cs" />
-    <Compile Include="Models\AnnotationDataModel.cs" />
-    <Compile Include="Models\AnnotationModel.cs" />
-    <Compile Include="Models\DocumentInfo.cs" />
-    <Compile Include="Models\DocumentModel.cs" />
+    <Compile Include="Models\DerivationModel.cs" />
     <Compile Include="Models\NewAnnotationModel.cs" />
     <Compile Include="Models\NewDocumentPermission.cs" />
     <Compile Include="Models\PasswordHash.cs" />

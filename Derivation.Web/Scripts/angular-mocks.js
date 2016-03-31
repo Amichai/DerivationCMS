@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license AngularJS v1.3.4
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
@@ -1820,7 +1820,7 @@ angular.mock.$RootElementProvider = function() {
  * inspected and controlled in a synchronous manner within test code.
  *
  *
- * <div doc-module-components="ngMock"></div>
+ * <div derivation-module-components="ngMock"></div>
  *
  */
 angular.module('ngMock', ['ng']).provider({

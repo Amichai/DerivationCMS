@@ -33,7 +33,7 @@
                 delay(f);
             });
         }
-        
+
         function getSelectionText() {
             var text = "";
             if (window.getSelection) {
@@ -185,7 +185,7 @@
                 $('#annotation_' + annotationIndex).removeClass('highlightedText');
             }
         }
-            
+
         window.addEventListener('resize', onResize, false);
         function onResize() {
             $scope.pageHeight = window.innerHeight - 60;

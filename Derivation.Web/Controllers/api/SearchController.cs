@@ -11,7 +11,8 @@ namespace Derivation.Web.Controllers.api
     public class SearchController : ApiController
     {
         public SearchResultsModel Get(string query) {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new SearchResultsModel();
         }
     }
 }

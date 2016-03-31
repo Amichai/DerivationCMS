@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Derivation.Web.Util;
 
 namespace Derivation.Web.Controllers
 {
@@ -11,7 +12,9 @@ namespace Derivation.Web.Controllers
         // GET: AddNew
         public ActionResult Index()
         {
-            return View();
+            var user = IdentityUtil.GetCurrentUser();
+
+            return View("Index", model: user.UserId);
         }
     }
 }

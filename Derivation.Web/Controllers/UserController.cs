@@ -10,7 +10,8 @@ namespace Derivation.Web.Controllers
     public class UserController : Controller
     {
         // GET: User
-        public ActionResult Index(string userId) {
+        public ActionResult Index(string userId)
+        {
             return View("Index", model:userId);
         }
     }
