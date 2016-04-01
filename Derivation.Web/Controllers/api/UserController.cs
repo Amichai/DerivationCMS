@@ -20,7 +20,7 @@ namespace Derivation.Web.Controllers.api
             }
             var json = JObject.Parse(userDict["UserInfo"]);
             var user = UserModel.FromJson(json);
-            var docs = db.GetUserDerivations(userId);
+            var docs = db.GetUserDerivations(userId).Where(derivation => !derivation.IsArchived);
             return new ProfileModel() {
                 Created = new DateTime(user.Created),
                 CreatedString = user.CreatedString,

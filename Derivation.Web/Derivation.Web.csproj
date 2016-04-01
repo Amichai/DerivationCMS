@@ -163,6 +163,7 @@
     <Compile Include="Controllers\api\SearchController.cs" />
     <Compile Include="Controllers\api\UserController.cs" />
     <Compile Include="Controllers\api\UsersController.cs" />
+    <Compile Include="Controllers\DerivationController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DerivationIdUserId.cs" />
     <Compile Include="Models\DerivationModel.cs" />
     <Compile Include="Models\NewAnnotationModel.cs" />
     <Compile Include="Models\NewDocumentPermission.cs" />
@@ -182,6 +184,8 @@
     <Compile Include="Models\TokenizedAnnotation.cs" />
     <Compile Include="Models\TokenRange.cs" />
     <Compile Include="Models\UpdateAnnotationModel.cs" />
+    <Compile Include="Models\UserIdDerivation.cs" />
+    <Compile Include="Models\UserIdDerivationId.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\IdentityUtil.cs" />
@@ -250,6 +254,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Scripts\Controllers\AddNewController.js" />
+    <Content Include="Scripts\Controllers\DerivationController.js" />
     <Content Include="Scripts\Controllers\DocumentController.js" />
     <Content Include="Scripts\Controllers\HomeController.js" />
     <Content Include="Scripts\Controllers\NavBarController.js" />
@@ -1044,6 +1049,7 @@
     <Content Include="Views\Document\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Derivation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

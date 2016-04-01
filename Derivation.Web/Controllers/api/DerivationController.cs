@@ -21,6 +21,23 @@ namespace Derivation.Web.Controllers.api
             return doc;
         }
 
+        // POST: api/Derivation
+        public DerivationModel Post(Guid id, [FromBody]DerivationModel doc)
+        {
+            //doc.Owner = IdentityUtil.GetCurrentUser().UserId;
+            //doc.Id = Guid.NewGuid();
+            //bool success = DynamoDBConnection.Instance.AddDerivation(doc);
+            doc.Id = id;
+            DynamoDBConnection.Instance.AddDerivation(doc);
+            return doc;
+
+        }
+
+        public DerivationModel Get(Guid id)
+        {
+            return DynamoDBConnection.Instance.GetDerivation(id);
+        }
+
         public IEnumerable<DerivationModel> Get()
         {
             var currentUser = IdentityUtil.GetCurrentUser();
@@ -28,6 +45,18 @@ namespace Derivation.Web.Controllers.api
                 .Where(i => !i.IsArchived).ToList();
 
             return documents;
+        }
+
+        public void Put([FromBody]DerivationModel doc)
+        {
+            DynamoDBConnection.Instance.AddDerivation(doc);
+        }
+
+        public void Delete(Guid id)
+        {
+            //TODO: check user permissions
+            //DynamoDBConnection.Instance.DeleteDocument(id, currentUser.UserId);
+            DynamoDBConnection.Instance.ArchiveDocument(id);
         }
     }
 }

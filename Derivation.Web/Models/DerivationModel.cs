@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Derivation.Web.Data;
 using Newtonsoft.Json.Linq;
 
@@ -28,7 +29,20 @@ namespace Derivation.Web.Models
                 Id = Guid.Parse(dict["DerivationId"]),
                 IsArchived = bool.Parse(dict["IsArchived"]),
                 Description = dict["Description"],
+                Steps = JArray.Parse(dict["Steps"]).Select(step => DerivationStep.Parse(step)).ToList()
             };
+        }
+
+        public JObject ToJson()
+        {
+            var toReturn = new JObject();
+            toReturn["Title"] = Title;
+            toReturn["Owner"] = Owner;
+            toReturn["DerivationId"] = Id;
+            toReturn["IsArchived"] = IsArchived;
+            toReturn["Description"] = Description;
+            toReturn["Steps"] = new JArray(Steps.Select(step => step.ToJson()));
+            return toReturn;
         }
 
         internal DynamoDBConnection.TableAttribute[] GetTableAttributes()
@@ -52,11 +66,24 @@ namespace Derivation.Web.Models
 
     public class DerivationStep
     {
+        private DerivationStep()
+        {
+        }
+
         public string Equation { get; set; }
 
         public string Transition { get; set; }
 
         public string Notes { get; set; }
+
+        public static DerivationStep Parse(JToken token)
+        {
+            var step = new DerivationStep();
+            step.Equation = token["Equation"].Value<string>();
+            step.Transition = token["Transition"].Value<string>();
+            step.Notes = token["Notes"].Value<string>();
+            return step;
+        }
 
         public JObject ToJson()
         {

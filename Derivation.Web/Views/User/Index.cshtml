@@ -11,16 +11,9 @@
     </div>
     <div class="row">
         <div class="col-md-6 col-sm-6">
-            <h3>Documents</h3>
-            <div ng-repeat="derivation in derivationuments">
-                <a href="/Document?id={{derivation.Id}}">{{derivation.Title}}</a>
-                <hr />
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <h3>Annotations</h3>
-            <div ng-repeat="ann in annotations">
-                <span title="{{ann.Body}}">{{ann.PreviewText}}</span>
+            <h3>Derivations</h3>
+            <div ng-repeat="derivation in derivations">
+                <a href="/Derivation?id={{derivation.Id}}">{{derivation.Title}}</a>
                 <hr />
             </div>
         </div>

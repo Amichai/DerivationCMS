@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div ng-controller="derivationCtrl">
+
+    <h2>{{derivation.Title}}</h2>
+
+    <h4>{{derivation.Description}}</h4>
+
+    <div ng-repeat="step in derivation.Steps">
+        ${{step.Equation}}$
+        <br/>
+        {{step.Transition}}
+        <br />
+        {{step.Notes}}
+        <br />
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script>
+        var documentId = '@Model.DerivationId';
+        var userId = '@Model.UserId';
+        var role = '@Model.Role';
+    </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    <script src="~/Scripts/Controllers/DerivationController.js"></script>
+}

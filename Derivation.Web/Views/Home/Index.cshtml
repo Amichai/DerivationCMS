@@ -1,6 +1,6 @@
 ﻿
 <div ng-controller="mainCtrl">
-    <h3>My Derivations</h3>
+    <h3>Index</h3>
     <table st-table="documents"
            st-safe-src="documentsSafe" class="table table-striped">
         <thead>
@@ -19,7 +19,7 @@
                 <td>
                     <a ng-click="edit(row)" style="cursor: pointer">Edit</a>
                 </td>
-                <td><a href="/Document?id={{row.Id}}">{{row.Title}}</a></td>
+                <td><a href="/Derivation?id={{row.Id}}">{{row.Title}}</a></td>
                 <td>
                     <span ng-show="row.IsOwnedByMe"><i>me</i></span>
                     <a ng-hide="row.IsOwnedByMe" style="cursor:pointer" href="/User?userId={{row.Owner}}">{{row.Owner}}</a>
@@ -47,35 +47,6 @@
                 <div class="modal-footer" style="margin-top:0">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger" ng-click="confirmDelete()">Confirm</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="editPermissionsModal" tabindex="-1" role="dialog" aria-labelledby="editPermissionsModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="editPermissionsModalLabel"><i>{{editPermissionsDoc.Title}}</i> - Edit Permissions</h4>
-                </div>
-                <div class="modal-body">
-                    <div ng-repeat="perm in editPermissionsDoc.Permissioned">
-                        <button type="button" class="btn btn-danger btn-xs">
-                            <span class="glyphicon glyphicon-remove" ng-click="removePermissionedUser(perm)"></span>
-                        </button>
-                        <a href="/User?userId={{perm}}">{{perm}}</a>
-                    </div>
-                    <input ng-model="newPermissionedUser"/>
-                    <button type="button" class="btn btn-default btn-sm"
-                            ng-click="addNewPermissionedUser()">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
