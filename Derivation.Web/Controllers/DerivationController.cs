@@ -11,7 +11,7 @@ namespace Derivation.Web.Controllers
     public class DerivationController : Controller
     {
         // GET: Derivation
-        public ActionResult Index(Guid id)
+        public ActionResult Index(Guid id, bool edit)
         {
             var user = IdentityUtil.GetCurrentUser();
 

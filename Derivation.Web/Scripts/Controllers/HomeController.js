@@ -37,7 +37,7 @@
         }
 
         $scope.edit = function (row) {
-            window.location.href = baseUrl + 'AddNew?id=' + row.Id;
+            window.location.href = baseUrl + 'AddNew?id=' + row.Id + '&edit=true';
         }
 
         $scope.confirmDelete = function (doc) {

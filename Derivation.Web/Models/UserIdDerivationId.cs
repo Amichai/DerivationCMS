@@ -4,7 +4,7 @@ namespace Derivation.Web.Models
 {
     public sealed class UserIdDerivationId
     {
-        public UserIdDerivationId(string userId, Guid? derivationId = null)
+        public UserIdDerivationId(string userId, Guid? derivationId)
         {
             UserId = userId;
             DerivationId = derivationId;

@@ -14,7 +14,7 @@ namespace Derivation.Web.Controllers
     public class AddNewController : Controller
     {
         // GET: AddNew
-        public ActionResult Index(Guid? id)
+        public ActionResult Index(Guid? id, bool edit = false)
         {
             var user = IdentityUtil.GetCurrentUser();
             return View("Index", model: new UserIdDerivationId(user.UserId, id));

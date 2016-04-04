@@ -4,22 +4,32 @@
 }
 
 <div ng-controller="addNewCtrl">
+    <div ng-if="isEditingHeader">
+        <a ng-click="previewHeader()">preview</a>
 
-    <h2 ng-if="!isEditing()">Add New Derivation</h2>
-    <h2 ng-if="isEditing()">Edit Derivation</h2>
+        <h3>Title:</h3>
+        <input type="text" class="form-control" ng-model="newTitle" style="max-width: 100%; width: 100%;" />
 
-
-
-    <h3>Title:</h3>
-    <input type="text" class="form-control" ng-model="newTitle" style="max-width: 100%; width: 100%;"/>
-
-    <div>
-        <span>Description:</span>
-        <textarea class="form-control" ng-model="newDescription" style="max-width: 100%; width: 100%;"></textarea>
+        <span>Statement of Theorem:</span>
+        <textarea class="form-control" ng-model="newDescription" style="max-width: 100%; width: 100%; height: 300px"></textarea>
     </div>
 
+    <div ng-if="!isEditingHeader">
+        <a ng-click="editHeader()">edit</a>
+
+        <h2>{{newTitle}}</h2>
+
+        <h3>Statement:</h3>
+
+        <div style="white-space: pre">
+            <div>{{newDescription}}</div>
+        </div>
+    </div>
+
+    <h3>Proof:</h3>
+
     <div ng-repeat="step in steps track by $index">
-        <br/>
+        <br />
         <div>
             <span style="font-size: 22px;font-weight: bold">Step {{$index + 1}}</span>
 
@@ -30,13 +40,13 @@
             <a ng-click="doneEditing(step)" style="cursor: pointer" ng-if="isEditStep(step)">Done</a>
 
         </div>
-        <br/>
+        <br />
 
         <div ng-if="!isEditStep(step)">
             {{step.Transition}}
-            <br/>
+            <br />
             ${{step.Equation}}$
-            <br/>
+            <br />
             {{step.Notes}}
         </div>
         <div ng-if="isEditStep(step)">
@@ -54,43 +64,47 @@
             </div>
         </div>
 
-        <br/>
-
-    </div>
-    <br/>
-
-    <h3>Add Step:</h3>
-
-    <div>
-        <div>
-            <span>Equation:</span>
-            <textarea class="form-control" ng-model="newEquation" style="max-width: 100%; width: 100%;"></textarea>
-        </div>
-        <div>
-            <span>Transition:</span>
-            <textarea class="form-control" ng-model="newTransition" style="max-width: 100%; width: 100%;"></textarea>
-        </div>
-        <div>
-            <span>Notes:</span>
-            <textarea class="form-control" ng-model="newNotes" style="max-width: 100%; width: 100%;"></textarea>
-        </div>
         <br />
 
-        <div>
-            <button class="btn btn-default" ng-click="add()" style="float: right" title="Add Derivation Step">
-                <span class="glyphicon glyphicon-plus"></span>
-            </button>
-        </div>
+    </div>
+    <br />
 
-        <br/>
-        <br/>
+    <a ng-click="showAddStep()" ng-show="!isAddStepVisible">Add Step</a>
+    <a ng-click="hideAddStep()" ng-show="isAddStepVisible">Hide</a>
+
+    <div ng-show="isAddStepVisible">
+        <h3>Add Step:</h3>
 
         <div>
-            <button class="btn btn-default" ng-click="submit()">
-                <span ng-if="!isEditing()">Submit</span>
-                <span ng-if="isEditing()">Save</span>
-            </button>
+            <div>
+                <span>Equation:</span>
+                <textarea class="form-control" ng-model="newEquation" style="max-width: 100%; width: 100%;"></textarea>
+            </div>
+            <div>
+                <span>Transition:</span>
+                <textarea class="form-control" ng-model="newTransition" style="max-width: 100%; width: 100%;"></textarea>
+            </div>
+            <div>
+                <span>Notes:</span>
+                <textarea class="form-control" ng-model="newNotes" style="max-width: 100%; width: 100%;"></textarea>
+            </div>
+            <br/>
+
+            <div>
+                <button class="btn btn-default" ng-click="add()" style="float: right" title="Add Derivation Step">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+
+            <br/>
+            <br/>
         </div>
+    </div>
+
+    <div>
+        <button class="btn btn-default" ng-click="submit()">
+            <span>Save</span>
+        </button>
     </div>
 </div>
 

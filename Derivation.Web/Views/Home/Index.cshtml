@@ -5,7 +5,7 @@
            st-safe-src="documentsSafe" class="table table-striped">
         <thead>
             <tr>
-                <th></th>
+                @*<th></th>*@
                 <th></th>
                 <th st-sort="Title">Title</th>
                 <th st-sort="Owner">Owner</th>
@@ -16,10 +16,10 @@
                 <td>
                     <span class="glyphicon glyphicon-trash" style="cursor: pointer" ng-click="trash(row)"></span>
                 </td>
-                <td>
+                @*<td>
                     <a ng-click="edit(row)" style="cursor: pointer">Edit</a>
-                </td>
-                <td><a href="/Derivation?id={{row.Id}}">{{row.Title}}</a></td>
+                </td>*@
+                <td><a href="/AddNew?id={{row.Id}}">{{row.Title}}</a></td>
                 <td>
                     <span ng-show="row.IsOwnedByMe"><i>me</i></span>
                     <a ng-hide="row.IsOwnedByMe" style="cursor:pointer" href="/User?userId={{row.Owner}}">{{row.Owner}}</a>

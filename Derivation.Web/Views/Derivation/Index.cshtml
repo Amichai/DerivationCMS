@@ -5,9 +5,12 @@
 
 <div ng-controller="derivationCtrl">
 
+
     <h2>{{derivation.Title}}</h2>
 
-    <h4>{{derivation.Description}}</h4>
+    <div style="white-space: pre">
+        <h4>{{derivation.Description}}</h4>
+    </div>
 
     <div ng-repeat="step in derivation.Steps">
         ${{step.Equation}}$
